@@ -1,3 +1,4 @@
+from typing import List
 from hanoi.turn import HanoiTurn
 
 #funktion bewege (Zahl i, Stab a, Stab b, Stab c) {
@@ -21,9 +22,9 @@ class HanoiSolver:
         self.__sequence = []
         pass
 
-    def Solve(self,i) -> None:
+    def Solve(self,i) -> List:
         self.solve(i,self.__r1,self.__r2,self.__r3)
-        pass
+        return self.__sequence
 
     def solve(self,i,a,b,c) -> None:
         if i > 0:

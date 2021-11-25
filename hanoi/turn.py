@@ -1,6 +1,6 @@
 class HanoiTurn:
-    __from: int
-    __to: int
+    From: int
+    To: int
 
     def __init__(self,fromP,toP) -> None:
         self.__from = fromP
