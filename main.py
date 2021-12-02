@@ -1,4 +1,5 @@
-
+from typing import Any
+from typing import List
 class Vec3D:
     X: float
     Y: float
@@ -47,11 +48,7 @@ class Controller:
         self.STACK_1_H = 4
         self.STACK_2_H = 0
         self.STACK_3_H = 0
-        available_ports = list_ports.comports()
-        self.port = available_ports[0].device
-        self.device = pydobot.Dobot(port=self.port, verbose=True)
         self.lastPost: Vec3D
-        print("dobot connected successfully on "+self.port)
         pass
 
     def RunSequence(self, sequence) -> None:
@@ -61,10 +58,10 @@ class Controller:
 
     def executeTurn(self, turn) -> None:
         self.moveToVector(self.indexToVector(turn.From),self.getStackHeight(turn.From)) # go to point a
-        self.device.suck(True) # enable the gripper
+        #self.device.suck(True) # enable the gripper
         self.changeStackHeight(turn.From,-1)
         self.moveToVector(self.indexToVector(turn.To),self.getStackHeight(turn.To)) # go to point b
-        self.device.suck(False) # disable the gripper
+        #self.device.suck(False) # disable the gripper
         self.changeStackHeight(turn.To,1)
         self.moveToVector(self.NEUTRAL_POS) # return to a neutral position
         pass
@@ -101,7 +98,7 @@ class Controller:
         return 0
 
     def moveToVector(self, target: Vec2D,height: float) -> None:
-        self.device.move_to(target.X, height, target.Z, self.computeRotation(target.X, height, target.Z), wait=True)
+        dType.SetPTPCmd(api,2,target.X,height,target.Z,0,1)
         self.lastPost = Vec3D(target.X, height, target.Z)
         pass
 
@@ -154,8 +151,8 @@ class HanoiTurn:
     To: int
 
     def __init__(self,fromP,toP) -> None:
-        self.__from = fromP
-        self.__to = toP
+        self.From = fromP
+        self.To = toP
 
 
 hs = HanoiSolver([1,2,3,4,],[0,0,0,0],[0,0,0,0])
