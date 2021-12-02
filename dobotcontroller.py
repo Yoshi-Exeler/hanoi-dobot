@@ -18,9 +18,9 @@ class Controller:
 
 
     def __init__(self) -> None:
-        self.STACK_1_XZ = Vec2D(0,0,0)
-        self.STACK_2_XZ = Vec2D(0,0,0)
-        self.STACK_3_XZ = Vec2D(0,0,0)
+        self.STACK_1_XZ = Vec2D(0,0)
+        self.STACK_2_XZ = Vec2D(0,0)
+        self.STACK_3_XZ = Vec2D(0,0)
         self.STACK_1_H = 4
         self.STACK_2_H = 0
         self.STACK_3_H = 0
